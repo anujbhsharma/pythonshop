@@ -30,9 +30,9 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = False
 # for deployment add '*'
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['web-app-kcw9.onrender.com','*']
 # for deployment added below
-# CSRF_TRUSTED_ORIGINS = ['']
+CSRF_TRUSTED_ORIGINS = ['https://web-app-kcw9.onrender.com']
 
 
 # Application definition
@@ -180,8 +180,8 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allows-popups'
 
 # AWS
 
-# AWS_ACCESS_KEY_ID = "AKIAW3MEFZ4KXP3F7FRA"
-# AWS_SECRET_ACCESS_KEY = "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"
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 
 # commented above to get from render
 
