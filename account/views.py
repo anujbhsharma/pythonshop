@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.template import ContextPopException
 from payment.forms import ShippingForm
 from payment.models import OrderItem, ShippingAddress
-from .forms import CreateUserForm, LoginForm , UpdateUserForm
+from .forms import CreateUserForm, LoginForm , UpdateUserForm , FeedbackForm
 from django.contrib.sites.shortcuts import get_current_site
 from .token import user_tokenizer_generate
 from django.template.loader import render_to_string
@@ -194,7 +194,26 @@ def track_orders(request):
 
         return render(request, 'account/track-orders.html')
 
+@login_required(login_url='my-login')
+def feedback(request):
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            email = form.cleaned_data.get('email')
+            message = form.cleaned_data.get('message')
 
+            send_mail('Feedback Submitted', 'Thank you for your message. Your response has been submitted successfully.' +'\n\n'+
+                     str(email)+ '\n\n'+"message : " +str(message), settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=False)
+            
+
+            return JsonResponse({'success':"feedback sent successfully!"})
+
+        
+    else:
+        form = FeedbackForm()
+
+    return render(request, 'account/feedback.html', {'form': form})
  
 
 
