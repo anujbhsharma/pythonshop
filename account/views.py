@@ -11,6 +11,8 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 # Create your views here.
 from django.conf import settings
+from django.http import JsonResponse
+from django.core.mail import send_mail
 from django.contrib import messages
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
