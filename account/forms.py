@@ -42,6 +42,12 @@ class UpdateUserForm(forms.ModelForm):
         if(len(email) >= 250):
             raise forms.ValidationError('Email is too long')
         return email
+
+
+class FeedbackForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)
         
 
         
